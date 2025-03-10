@@ -3,6 +3,7 @@ using System.Web;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Caching.Memory;
 using Api.Data;
+using System.Diagnostics;
 
 namespace Api
 {
@@ -25,7 +26,7 @@ namespace Api
                 //            .Distinct()
                 //            .ToArray() ?? [];
 
-                // Deserialize the zones.json file from the wwwroot folder
+                //Deserialize the zones.json file from the wwwroot folder
                 var zonesFilePath = Path.Combine(webHostEnvironment.WebRootPath, "zones.json");
                 if (!File.Exists(zonesFilePath))
                 {
@@ -45,15 +46,16 @@ namespace Api
 
         private static int forecastCount = 0;
 
+        [DebuggerStepThrough]
         public async Task<Forecast[]> GetForecastByZoneAsync(string zoneId)
         {
             // Create an exception every 5 calls to simulate and error for testing
-            forecastCount++;
+            //forecastCount++;
 
-            if (forecastCount % 5 == 0)
-            {
-                throw new Exception("Random exception thrown by NwsManager.GetForecastAsync");
-            }
+            //if (forecastCount % 5 == 0)
+            //{
+            //    throw new Exception("Random exception thrown by NwsManager.GetForecastAsync");
+            //}
 
             var zoneIdSegment = HttpUtility.UrlEncode(zoneId);
             var zoneUrl = $"https://api.weather.gov/zones/forecast/{zoneIdSegment}/forecast";
@@ -80,12 +82,6 @@ namespace Microsoft.Extensions.DependencyInjection
             });
 
             services.AddMemoryCache();
-
-            // Add default output caching
-            services.AddOutputCache(options =>
-            {
-                options.AddBasePolicy(builder => builder.Cache());
-            });
 
             return services;
         }
