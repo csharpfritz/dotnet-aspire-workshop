@@ -230,6 +230,6 @@ A more complete [HealthChecks UI sample](https://github.com/dotnet/aspire-sample
 
 Adding health checks endpoints to applications in non-development environments has security implications. See [Health Checks in .NET Aspire](https://aka.ms/dotnet/aspire/healthchecks) for details before enabling these endpoints in non-development environments.
 
-**Next**: [Module #14 - Exploring .NET Aspire 9.4 Features](14-aspire-9-4-features.md)
+**Next**: [Module #14 - GitHub Models Integration](14-github-models-integration.md)
 
 We strongly recommend adding caching, timeouts, and security to all of your healthchecks endpoints and user interfaces before publishing them to the public internet.  The sample as demonstrated here is not recommended for production use.  Consult the links above for more information about securing health check endpoints
